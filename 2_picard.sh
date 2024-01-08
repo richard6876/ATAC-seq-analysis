@@ -1,13 +1,13 @@
 #!bin/bash/
 
-Fpath="/home/baix/SARS-CoV-2/ATAC-seq/Huh7"
+Fpath="/home/wanghy/SARS-CoV-2/ATAC-seq/Huh7"
 
 cat ${Fpath}/bash-T2T/fileNames.txt | while read i
 
 do
 	cd ${Fpath}/bwa-T2T
 	samtools sort -@ 16 -m 1G ${i}.sam -o ${i}.sortP.bam
-	java -jar /home/baix/bxsoft/picard.jar MarkDuplicates REMOVE_DUPLICATES=true  I=${i}.sortP.bam O=${i}.sortP_rmdupPICARD.bam M=${i}.marked_dup_metrics.txt
+	java -jar /home/wanghy/bxsoft/picard.jar MarkDuplicates REMOVE_DUPLICATES=true  I=${i}.sortP.bam O=${i}.sortP_rmdupPICARD.bam M=${i}.marked_dup_metrics.txt
 	
 	cd ${Fpath}/picard
 	samtools index ${i}.sortP_rmdupPICARD.bam
